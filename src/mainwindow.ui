@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>890</width>
+    <height>673</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Parkinson Firmware Updater</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="okBtn">
@@ -66,32 +69,6 @@
      <number>24</number>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuGunner_was_here">
-    <property name="title">
-     <string>Gunner was here</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menugunner_wasnt_here">
-    <property name="title">
-     <string>gunner wasnt here</string>
-    </property>
-    <addaction name="actionddfdf"/>
-    <addaction name="actiondfdfd"/>
-    <addaction name="actionff"/>
-    <addaction name="actionaa"/>
-   </widget>
-   <addaction name="menuGunner_was_here"/>
-   <addaction name="menugunner_wasnt_here"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionddfdf">
