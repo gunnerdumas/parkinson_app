@@ -2,6 +2,9 @@
 #include <QMainWindow>
 #include <QProgressBar>
 #include <QSlider>
+#include <QFile>
+
+#include "filedownloader.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,4 +27,5 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    FileDownloader *m_pFile;
 };

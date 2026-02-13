@@ -6,9 +6,13 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    connect(ui->okBtn, SIGNAL(clicked(bool)), this, SLOT(slotBtnClicked(bool)));
+    QUrl url("https://github.com/gunnerdumas/fw_test/archive/refs/tags/v0.1.0.zip");
+    m_pFile = new FileDownloader(url, this);
+    // connect(ui->okBtn, SIGNAL(downloaded()), m_pFile, SLOT(slotLoad()));
+    // connect(ui->okBtn, SIGNAL(clicked(bool)), this, SLOT(slotBtnClicked(bool)));
     connect(ui->noBtn, SIGNAL(clicked()), this, SLOT(onBtnCancel()));
     connect(ui->slider, SIGNAL(valueChanged(int)), ui->progress, SLOT(setValue(int)));
+    
 }
 
 MainWindow::~MainWindow()

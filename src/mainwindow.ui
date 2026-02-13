@@ -69,28 +69,50 @@
      <number>24</number>
     </property>
    </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>100</y>
+      <width>120</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>GroupBox</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>117</x>
+      <y>540</y>
+      <width>291</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="commandLinkButton">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>360</y>
+      <width>176</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>OpenHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>CommandLinkButton</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionddfdf">
-   <property name="text">
-    <string>ddfdf</string>
-   </property>
-  </action>
-  <action name="actiondfdfd">
-   <property name="text">
-    <string>dfdfd</string>
-   </property>
-  </action>
-  <action name="actionff">
-   <property name="text">
-    <string>ff</string>
-   </property>
-  </action>
-  <action name="actionaa">
-   <property name="text">
-    <string>aa</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>
