@@ -28,6 +28,6 @@ class FileDownloader: public QObject
         QNetworkAccessManager m_WebCtrl;
         QByteArray m_DownloadedData;
         QUrl url;
-        bool canDownload = false;
+        bool canDownload;
 
 };

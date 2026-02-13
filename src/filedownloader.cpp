@@ -3,6 +3,7 @@
 FileDownloader::FileDownloader(QUrl gitrepo, QObject *parent) : QObject(parent)
 {
     url = gitrepo;
+    canDownload = false;
 }
 
 FileDownloader::~FileDownloader(){}
