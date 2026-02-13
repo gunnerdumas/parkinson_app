@@ -14,7 +14,7 @@ class FileDownloader: public QObject
     public:
         explicit FileDownloader(QUrl gitrepo, QObject *parent=0);
         virtual ~FileDownloader();
-        void beginDownload();
+        
         QByteArray downloadedData() const;
 
     signals:
@@ -22,9 +22,12 @@ class FileDownloader: public QObject
 
     private slots:
         void fileDownloaded(QNetworkReply *pReply);
+        void beginDownload();
     
     private:
         QNetworkAccessManager m_WebCtrl;
         QByteArray m_DownloadedData;
+        QUrl url;
+        bool canDownload = false;
 
 };
