@@ -14,6 +14,7 @@ class FileDownloader: public QObject
     public:
         explicit FileDownloader(QUrl gitrepo, QObject *parent=0);
         virtual ~FileDownloader();
+        void beginDownload();
         QByteArray downloadedData() const;
 
     signals:
