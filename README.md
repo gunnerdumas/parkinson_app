@@ -5,7 +5,7 @@ This is the desktop application for the 2026 senior design Parkinsons Team. This
 The App uses [Qt](https://www.qt.io/) has both the networking and GUI. 
 
 ## Workspace
-Everybody needs to setup a Github accout. When working on the project, make your own workspace with ```git checkout -b yourname_ws```. This is where you will be doing your work and helps us log whos doing what.
+Everybody needs to setup a Github accout. When working on the project, make your own workspace with ```git checkout -b yourname_ws```. This is where you will be doing your work and helps us log whos doing what. Example ```git checkout -b gunner_ws``` is where i do my work.
 
 ## Linux
 Linux will be using VScode. Install CMake and Make along with the **Qt Extension Pack** VScode extension.
