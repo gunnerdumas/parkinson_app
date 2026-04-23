@@ -6,10 +6,11 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->size());
     // https://github.com/gunnerdumas/fw_test/archive/refs/tags/v0.1.0.zip
     QUrl url("https://github.com/gunnerdumas/fw_test/releases/download/latest/fw.txt");
     m_pFile = new FileDownloader(url, this);
-    
+
     connect(ui->downloadBtn, SIGNAL(clicked()), m_pFile, SLOT(beginDownload()));
     // connect(ui->downloadBtn, SIGNAL(clicked()), m_pFile, SLOT(getUserInput()));
     connect(m_pFile, &FileDownloader::showMessage, ui->textBrowser, &QTextBrowser::append);
