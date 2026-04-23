@@ -21,7 +21,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void onBtnClk();
+    void onDownloadBtnClk();
     void onBtnCancel();
     
 private:

@@ -8,8 +8,11 @@ FileDownloader::FileDownloader(QUrl gitrepo, QObject *parent) : QObject(parent)
 
 FileDownloader::~FileDownloader(){}
 
-void FileDownloader::beginDownload()
+void FileDownloader::beginDownload(const QString &user, const QString &repo)
 {
+    log(user);
+    log(repo);
+    
     if(!canDownload){
         log("Downloading file...");
         QNetworkRequest request(url);
