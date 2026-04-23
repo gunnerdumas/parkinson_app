@@ -23,8 +23,7 @@ public:
 private slots:
     void onBtnClk();
     void onBtnCancel();
-    void slotBtnClicked(bool checked);
-
+    
 private:
     Ui::MainWindow *ui;
     FileDownloader *m_pFile;

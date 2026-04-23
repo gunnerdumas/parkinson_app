@@ -11,12 +11,14 @@ FileDownloader::~FileDownloader(){}
 void FileDownloader::beginDownload()
 {
     if(!canDownload){
+        log("Downloading file...");
         QNetworkRequest request(url);
         connect(&m_WebCtrl, SIGNAL(finished(QNetworkReply*)), this, SLOT (fileDownloaded(QNetworkReply*)));
         request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
         m_WebCtrl.get(request);
         canDownload=true;
     }else{
+        log("File already downloaded!");
         qDebug() << "File already downloaded!";
     }
 }
@@ -34,6 +36,7 @@ void FileDownloader::fileDownloaded(QNetworkReply *pReply)
         file.write(m_DownloadedData);
         qDebug() << pReply->url();
         file.close();
+        log("File downloaded.");
         qDebug()<<"file downloaded";
     } 
     pReply->deleteLater();
@@ -41,8 +44,19 @@ void FileDownloader::fileDownloaded(QNetworkReply *pReply)
 
 }
 
+void FileDownloader::getUserInput()
+{
+
+}
+
 QByteArray FileDownloader::downloadedData() const {
 
     return m_DownloadedData;
+}
+
+void FileDownloader::log(const QString &msg)
+{
+    QString timeStamp = QDateTime::currentDateTime().toString("[hh:mm:ss] ");
+    emit showMessage(timeStamp + msg);
 }
 
