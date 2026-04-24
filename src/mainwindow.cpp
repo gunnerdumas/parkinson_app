@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->downloadBtn, SIGNAL(clicked()), this, SLOT(onDownloadBtnClk()));
     connect(m_pFile, &FileDownloader::showMessage, ui->textBrowser, &QTextBrowser::append);
-    connect(ui->noBtn, SIGNAL(clicked()), this, SLOT(onBtnCancel()));    
 }
 
 MainWindow::~MainWindow()
@@ -25,15 +24,15 @@ MainWindow::~MainWindow()
 void MainWindow::onDownloadBtnClk()
 {
     QString currentTime = QDateTime::currentDateTime().toString("[hh:mm:ss] ");
-    QString user = ui->github_user_box->text();
-    QString repo = ui->github_repo_box->text();
-
-    if(user.isEmpty() || repo.isEmpty()) {
-        ui->textBrowser->append(currentTime + "Error: User or Repo cannot be empty!");
+    
+    QString urlRaw = ui->url_box->text();
+    if(urlRaw.isEmpty())
+    {   
+        ui->textBrowser->append(currentTime + "Error: URL cannot be empty!");
         return;
     }
-
-    m_pFile->beginDownload(user, repo);
+    QUrl url(urlRaw);
+    m_pFile->beginDownload(urlRaw);
     
 }
 

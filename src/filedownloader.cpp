@@ -1,39 +1,71 @@
 #include "filedownloader.h"
 
+/**
+ * @brief Contructor to the FileDownloader class that handles
+ * the donloading of files in this program
+ * 
+ * @param gitrepo An empty repo that can be left empty or used later
+ * @param parent pointer to the ui parnet object
+ */
 FileDownloader::FileDownloader(QUrl gitrepo, QObject *parent) : QObject(parent)
 {
     url = gitrepo;
-    canDownload = false;
+    canDownload=false;
+    connect(&m_WebCtrl, &QNetworkAccessManager::finished, this, &FileDownloader::fileDownloaded);
 }
 
 FileDownloader::~FileDownloader(){}
 
-void FileDownloader::beginDownload(const QString &user, const QString &repo)
+
+/**
+ * @brief A public function that calles the fileDownload slot indirectly
+ * @param url The url address to the file or zip you want to download
+ */
+void FileDownloader::beginDownload(QUrl url)
 {
-    log(user);
-    log(repo);
+    log(url.toString());
     
     if(!canDownload){
         log("Downloading file...");
         QNetworkRequest request(url);
-        connect(&m_WebCtrl, SIGNAL(finished(QNetworkReply*)), this, SLOT (fileDownloaded(QNetworkReply*)));
-        request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::ManualRedirectPolicy);
+        request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, QNetworkRequest::NoLessSafeRedirectPolicy);
         m_WebCtrl.get(request);
-        canDownload=true;
     }else{
         log("File already downloaded!");
         qDebug() << "File already downloaded!";
     }
 }
 
+
+/**
+ * @brief Slot for QT that handles the file downloading from the requested url
+ * @param pReply The Url handle
+ */
 void FileDownloader::fileDownloaded(QNetworkReply *pReply)
 {
+    //bad web address
+    if(pReply->error() != QNetworkReply::NoError)
+    {
+        log("Network Error!");
+        pReply->deleteLater();
+        return;
+    }
+
+    //bad download or other errors
+    int statusCode =pReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if (statusCode < 200 || statusCode >= 300) {
+        log(QString("Download failed. HTTP Error: %1").arg(statusCode));
+        pReply->deleteLater();
+        return;
+    }
+
     // read data
     m_DownloadedData = pReply->readAll();
 
     // file handling
     QString downloadLocation = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
-    QString filePath = downloadLocation + QDir::separator() + "firmware.txt";
+    QString timeStamp = QDateTime::currentDateTime().toString("hh_mm_ss");
+    QString filePath = downloadLocation + QDir::separator() + "project_" + timeStamp + ".zip";
     QFile file(filePath);
     if(file.open(QIODevice::WriteOnly)){
         file.write(m_DownloadedData);
@@ -47,16 +79,10 @@ void FileDownloader::fileDownloaded(QNetworkReply *pReply)
 
 }
 
-void FileDownloader::getUserInput()
-{
-
-}
-
-QByteArray FileDownloader::downloadedData() const {
-
-    return m_DownloadedData;
-}
-
+/**
+ * @brief Helper function for logging and outputing to the TextBrowser UI
+ * @param msg The message string to output
+ */
 void FileDownloader::log(const QString &msg)
 {
     QString timeStamp = QDateTime::currentDateTime().toString("[hh:mm:ss] ");

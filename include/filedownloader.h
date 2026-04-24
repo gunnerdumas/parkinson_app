@@ -14,9 +14,9 @@ class FileDownloader: public QObject
     public:
         explicit FileDownloader(QUrl gitrepo, QObject *parent);
         virtual ~FileDownloader();
-        void beginDownload(const QString &user, const QString &repo);
+        void beginDownload(QUrl url);
         
-        QByteArray downloadedData() const;
+        // QByteArray downloadedData() const;
 
     signals:
         void downloaded();
@@ -24,7 +24,6 @@ class FileDownloader: public QObject
         
     private slots:
         void fileDownloaded(QNetworkReply *pReply);
-        void getUserInput();
     
     private:
         void log(const QString &msg);
